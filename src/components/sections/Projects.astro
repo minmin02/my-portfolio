@@ -16,8 +16,9 @@ const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
 
   <div class="project-grid">
     {projects.map((project, index) => {
+      const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       const imgSrc = project.data.image
-        ? `${import.meta.env.BASE_URL}photo/${project.data.image}.png`
+        ? `${base}/photo/${project.data.image}.png`
         : null;
       const notionUrl = project.data.notion ?? '#';
       return (

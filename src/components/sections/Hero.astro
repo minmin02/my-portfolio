@@ -54,7 +54,7 @@ import { profile } from '../../data/profile';
     <div class="hero-photo-col hero-animate-1">
       <div class="hero-photo-wrap">
         <img
-          src={`${import.meta.env.BASE_URL}photo/profile.jpeg`}
+          src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/photo/profile.jpeg`}
           alt="김민규 프로필 사진"
           class="hero-photo"
         />
