@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Tag from '../../components/ui/Tag.astro';
+import Button from '../../components/ui/Button.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -15,17 +17,90 @@ const { title, period, org, role, stack, summary, github, award } = project.data
 ---
 
 <Base title={`${title} — 김민규 포트폴리오`} description={summary}>
-  <main>
-    <article>
-      <h1>{title}</h1>
-      <p>{period} · {org}</p>
-      {award && <p>{award}</p>}
-      <p>{role}</p>
-      <p>{summary}</p>
-      <ul>
-        {stack.map((s) => <li>{s}</li>)}
-      </ul>
-      {github && <a href={github}>GitHub</a>}
+  <main class="container" style="padding-block: var(--section-padding-y);">
+    <div style="margin-bottom: var(--space-12);">
+      <a
+        href={import.meta.env.BASE_URL}
+        class="text-[var(--color-text-muted)] hover:text-[var(--color-accent)]"
+        style="font-size: var(--font-size-sm); text-decoration: none; transition: color 150ms;"
+      >
+        ← 포트폴리오로 돌아가기
+      </a>
+    </div>
+
+    <article class="grid gap-[var(--space-12)] max-w-3xl">
+      <header class="grid gap-[var(--space-6)]">
+        <div class="grid gap-[var(--space-3)]">
+          <p
+            class="text-[var(--color-text-muted)]"
+            style="font-size: var(--font-size-sm); letter-spacing: 0.06em;"
+          >
+            {period} · {org}
+          </p>
+          <h1
+            class="text-[var(--color-text)] font-[var(--font-weight-bold)]"
+            style="font-size: var(--font-size-3xl); line-height: 1.2; word-break: keep-all;"
+          >
+            {title}
+          </h1>
+          {award && (
+            <p
+              class="text-[var(--color-accent)]"
+              style="font-size: var(--font-size-sm); font-weight: var(--font-weight-medium);"
+            >
+              🏆 {award}
+            </p>
+          )}
+        </div>
+
+        <hr style="border-color: var(--color-border);" />
+
+        <div class="grid gap-[var(--space-4)]">
+          <div class="flex flex-col gap-[var(--space-1)]">
+            <span
+              class="text-[var(--color-text-muted)]"
+              style="font-size: var(--font-size-xs); letter-spacing: 0.1em;"
+            >
+              ROLE
+            </span>
+            <span
+              class="text-[var(--color-text)]"
+              style="font-size: var(--font-size-base);"
+            >
+              {role}
+            </span>
+          </div>
+
+          <div class="flex flex-col gap-[var(--space-2)]">
+            <span
+              class="text-[var(--color-text-muted)]"
+              style="font-size: var(--font-size-xs); letter-spacing: 0.1em;"
+            >
+              STACK
+            </span>
+            <div class="flex flex-wrap gap-[var(--space-2)]">
+              {stack.map((s) => <Tag>{s}</Tag>)}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section>
+        <p
+          class="text-[var(--color-text)]"
+          style="font-size: var(--font-size-lg); line-height: 1.8; word-break: keep-all;"
+        >
+          {summary}
+        </p>
+      </section>
+
+      {github && (
+        <footer>
+          <Button href={github} target="_blank" variant="secondary" size="md">
+            GitHub에서 보기 ↗
+          </Button>
+        </footer>
+      )}
     </article>
   </main>
 </Base>
