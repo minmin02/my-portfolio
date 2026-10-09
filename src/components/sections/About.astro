@@ -1,5 +1,6 @@
 ---
 import SectionTitle from '../ui/SectionTitle.astro';
+import Button from '../ui/Button.astro';
 import { profile } from '../../data/profile';
 
 const displayGpa = profile.education.gpa.includes('TODO')
@@ -10,36 +11,76 @@ const displayGpa = profile.education.gpa.includes('TODO')
 <section id="about" class="container" style="padding-block: var(--section-padding-y);">
   <SectionTitle id="about" number="01">소개</SectionTitle>
 
-  <div class="grid gap-[var(--space-16)] max-w-3xl">
-    <p
-      class="text-[var(--color-text)]"
-      style="font-size: var(--font-size-xl); line-height: 1.8; word-break: keep-all;"
-    >
-      {profile.description}
-    </p>
-
-    <div>
+  <div class="about-grid">
+    <!-- 왼쪽: 자기소개 텍스트 -->
+    <div class="about-description">
       <p
-        class="text-[var(--color-text-muted)]"
-        style="font-size: var(--font-size-xs); letter-spacing: 0.1em; margin-bottom: var(--space-4);"
+        class="text-[var(--color-text)]"
+        style="font-size: var(--font-size-xl); line-height: 1.8; word-break: keep-all;"
       >
-        EDUCATION
+        {profile.description}
       </p>
-      <div class="flex flex-col" style="gap: var(--space-2);">
-        <span
-          class="text-[var(--color-text)] font-[var(--font-weight-medium)]"
-          style="font-size: var(--font-size-base);"
+    </div>
+
+    <!-- 오른쪽: EDUCATION + 연락처 -->
+    <div class="about-sidebar">
+      <div>
+        <p
+          class="text-[var(--color-text-muted)]"
+          style="font-size: var(--font-size-xs); letter-spacing: 0.1em; margin-bottom: var(--space-4);"
         >
-          {profile.education.school}
-        </span>
-        <span class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
-          {profile.education.major}
-        </span>
-        <span class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
-          {profile.education.graduation}
-          {displayGpa && ` · GPA ${displayGpa}`}
-        </span>
+          EDUCATION
+        </p>
+        <div class="flex flex-col" style="gap: var(--space-2);">
+          <span
+            class="text-[var(--color-text)] font-[var(--font-weight-medium)]"
+            style="font-size: var(--font-size-base);"
+          >
+            {profile.education.school}
+          </span>
+          <span class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
+            {profile.education.major}
+          </span>
+          <span class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
+            {profile.education.graduation}
+            {displayGpa && ` · GPA ${displayGpa}`}
+          </span>
+        </div>
+      </div>
+
+      <div style="margin-top: var(--space-8);">
+        <p
+          class="text-[var(--color-text-muted)]"
+          style="font-size: var(--font-size-xs); letter-spacing: 0.1em; margin-bottom: var(--space-4);"
+        >
+          CONTACT
+        </p>
+        <div class="flex flex-col items-start" style="gap: var(--space-1);">
+          <Button href={profile.contact.github} target="_blank" variant="ghost" size="sm">
+            GitHub ↗
+          </Button>
+          <Button href={profile.contact.velog} target="_blank" variant="ghost" size="sm">
+            Velog ↗
+          </Button>
+          <Button href={`mailto:${profile.contact.email}`} variant="ghost" size="sm">
+            {profile.contact.email}
+          </Button>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .about-grid {
+    display: grid;
+    gap: var(--space-16);
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 2fr 1fr;
+      gap: var(--space-12);
+    }
+  }
+</style>

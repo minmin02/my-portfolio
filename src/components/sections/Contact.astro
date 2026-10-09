@@ -1,34 +1,56 @@
 ---
-import SectionTitle from '../ui/SectionTitle.astro';
 import Button from '../ui/Button.astro';
 import { profile } from '../../data/profile';
 ---
 
 <section id="contact" class="container" style="padding-block: var(--section-padding-y);">
-  <SectionTitle id="contact" number="07">연락</SectionTitle>
+  <p
+    class="text-[var(--color-text-muted)]"
+    style="font-size: var(--font-size-xs); letter-spacing: 0.1em; margin-bottom: var(--space-8);"
+  >
+    07 — 연락
+  </p>
 
-  <div class="grid gap-[var(--space-12)] max-w-2xl">
-    <p
-      class="text-[var(--color-text-muted)]"
-      style="font-size: var(--font-size-lg); line-height: 1.8; word-break: keep-all;"
+  <div class="grid gap-[var(--space-8)]">
+    <h2
+      class="text-[var(--color-text)] font-[var(--font-weight-bold)]"
+      style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.3; word-break: keep-all;"
     >
-      협업·인턴십·채용 문의를 환영합니다.
-    </p>
+      함께 일하고 싶으시다면
+    </h2>
+
+    <a
+      href={`mailto:${profile.contact.email}`}
+      class="contact-email"
+    >
+      {profile.contact.email}
+    </a>
 
     <div class="flex flex-wrap gap-[var(--space-3)]">
-      <Button href={`mailto:${profile.contact.email}`} variant="primary" size="md">
+      <Button href={`mailto:${profile.contact.email}`} variant="primary" size="lg">
         이메일 보내기
       </Button>
-      <Button href={profile.contact.github} target="_blank" variant="secondary" size="md">
+      <Button href={profile.contact.github} target="_blank" variant="secondary" size="lg">
         GitHub ↗
       </Button>
-      <Button href={profile.contact.velog} target="_blank" variant="ghost" size="md">
+      <Button href={profile.contact.velog} target="_blank" variant="ghost" size="lg">
         Velog ↗
       </Button>
     </div>
-
-    <p class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
-      {profile.contact.email}
-    </p>
   </div>
 </section>
+
+<style>
+  .contact-email {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.15s;
+    word-break: break-all;
+  }
+
+  .contact-email:hover {
+    color: var(--color-accent-hover);
+  }
+</style>
