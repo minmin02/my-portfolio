@@ -1,0 +1,10 @@
+---
+export interface Props {
+  class?: string;
+}
+const { class: extraClass = '' } = Astro.props;
+---
+
+<div class={`bg-[var(--color-surface)] border border-[var(--color-border)] p-[var(--space-6)] transition-colors duration-200 hover:border-[var(--color-text-muted)] ${extraClass}`}>
+  <slot />
+</div>
