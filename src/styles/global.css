@@ -1,20 +1,21 @@
 @import "tailwindcss";
 
 /* ===================================================
-   Design tokens — Editorial Light (B)
+   Design tokens — Blue Gradient
    hex 직접 사용 금지. 반드시 이 토큰만 쓸 것.
    =================================================== */
 
 :root {
   /* 기본값: 라이트 모드 */
-  --color-bg:          #fafaf8;
-  --color-surface:     #f3f3f0;
-  --color-surface-2:   #e8e8e4;
-  --color-border:      #d4d4cf;
-  --color-text:        #1a1a18;
-  --color-text-muted:  #6b6b66;
-  --color-accent:      #b45309;   /* amber-700 계열 */
-  --color-accent-hover:#92400e;   /* amber-800 */
+  --color-bg:          #f8faff;
+  --color-surface:     #f0f4ff;
+  --color-surface-2:   #e0e7ff;
+  --color-border:      #c7d2fe;
+  --color-text:        #1e1b4b;
+  --color-text-muted:  #64748b;
+  --color-accent:      #4f46e5;   /* indigo-600 */
+  --color-accent-hover:#4338ca;   /* indigo-700 */
+  --color-accent-end:  #0ea5e9;   /* sky-500 (그라데이션 끝) */
 
   /* 타이포그래피 */
   --font-sans: 'Pretendard Variable', 'Pretendard', system-ui, sans-serif;
@@ -58,14 +59,15 @@
 }
 
 [data-theme="dark"] {
-  --color-bg:         #1c1b19;
-  --color-surface:    #252420;
-  --color-surface-2:  #2e2d29;
-  --color-border:     #3d3c37;
-  --color-text:       #e8e6df;
-  --color-text-muted: #9b9891;
-  --color-accent:     #f59e0b;   /* amber-400 */
-  --color-accent-hover:#fbbf24;  /* amber-300 */
+  --color-bg:          #0f172a;
+  --color-surface:     #1e293b;
+  --color-surface-2:   #1e3a5f;
+  --color-border:      #334155;
+  --color-text:        #f1f5f9;
+  --color-text-muted:  #94a3b8;
+  --color-accent:      #818cf8;   /* indigo-400 */
+  --color-accent-hover:#a5b4fc;   /* indigo-300 */
+  --color-accent-end:  #38bdf8;   /* sky-400 */
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
   --shadow-md: 0 2px 8px rgba(0,0,0,0.5);
 }
@@ -111,6 +113,25 @@ hr {
 section {
   padding-block: var(--section-padding-y);
   border-bottom: 1px solid var(--color-border);
+}
+
+/* ===================================================
+   그라데이션 유틸
+   =================================================== */
+
+/* 텍스트 그라데이션 */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 그라데이션 구분선 */
+.gradient-hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-end), transparent);
 }
 
 /* ===================================================
