@@ -9,11 +9,11 @@ const displayGpa = profile.education.gpa.includes('TODO')
 ---
 
 <section id="about" class="container" style="padding-block: var(--section-padding-y);">
-  <SectionTitle id="about" number="01">소개</SectionTitle>
+  <div data-animate><SectionTitle id="about" number="01">소개</SectionTitle></div>
 
   <div class="about-grid">
     <!-- 왼쪽: 자기소개 텍스트 -->
-    <div class="about-description">
+    <div class="about-description" data-animate="fade-left" data-delay="1">
       <p
         class="text-[var(--color-text)]"
         style="font-size: var(--font-size-xl); line-height: 1.8; word-break: keep-all;"
@@ -23,7 +23,7 @@ const displayGpa = profile.education.gpa.includes('TODO')
     </div>
 
     <!-- 오른쪽: EDUCATION + 연락처 -->
-    <div class="about-sidebar">
+    <div class="about-sidebar" data-animate data-delay="2">
       <div>
         <p
           class="text-[var(--color-text-muted)]"
