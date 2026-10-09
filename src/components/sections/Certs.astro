@@ -1,5 +1,77 @@
 ---
+import SectionTitle from '../ui/SectionTitle.astro';
+import { profile } from '../../data/profile';
+
+const certs = profile.certifications.filter((c) => !c.includes('TODO'));
+const awards = profile.awards.filter((a) => !a.includes('TODO'));
+const eduPrograms = profile.educationPrograms.filter((e) => !e.includes('TODO'));
 ---
-<section id="certs">
-  <h2>자격증 · 수상 · 교육</h2>
+
+<section id="certs" class="container" style="padding-block: var(--section-padding-y);">
+  <SectionTitle id="certs" number="05">자격증 · 수상 · 교육</SectionTitle>
+
+  <div class="grid gap-[var(--space-12)]">
+    {certs.length > 0 && (
+      <div class="grid gap-[var(--space-4)]">
+        <p
+          class="text-[var(--color-text-muted)]"
+          style="font-size: var(--font-size-xs); letter-spacing: 0.1em;"
+        >
+          CERTIFICATIONS
+        </p>
+        <ul class="grid gap-[var(--space-3)]">
+          {certs.map((cert) => (
+            <li
+              class="text-[var(--color-text)]"
+              style="font-size: var(--font-size-base); line-height: 1.6; word-break: keep-all;"
+            >
+              {cert}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {awards.length > 0 && (
+      <div class="grid gap-[var(--space-4)]">
+        <p
+          class="text-[var(--color-text-muted)]"
+          style="font-size: var(--font-size-xs); letter-spacing: 0.1em;"
+        >
+          AWARDS
+        </p>
+        <ul class="grid gap-[var(--space-3)]">
+          {awards.map((award) => (
+            <li
+              class="text-[var(--color-text)]"
+              style="font-size: var(--font-size-base); line-height: 1.6; word-break: keep-all;"
+            >
+              {award}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {eduPrograms.length > 0 && (
+      <div class="grid gap-[var(--space-4)]">
+        <p
+          class="text-[var(--color-text-muted)]"
+          style="font-size: var(--font-size-xs); letter-spacing: 0.1em;"
+        >
+          EDUCATION PROGRAMS
+        </p>
+        <ul class="grid gap-[var(--space-3)]">
+          {eduPrograms.map((prog) => (
+            <li
+              class="text-[var(--color-text)]"
+              style="font-size: var(--font-size-base); line-height: 1.6; word-break: keep-all;"
+            >
+              {prog}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
 </section>

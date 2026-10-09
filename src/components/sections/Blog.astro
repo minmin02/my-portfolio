@@ -1,5 +1,33 @@
 ---
+import SectionTitle from '../ui/SectionTitle.astro';
+import { profile } from '../../data/profile';
 ---
-<section id="blog">
-  <h2>기술 블로그</h2>
+
+<section id="blog" class="container" style="padding-block: var(--section-padding-y);">
+  <SectionTitle id="blog" number="06">기술 블로그</SectionTitle>
+
+  <div class="grid gap-[var(--space-4)]">
+    {profile.blogPosts.map((post) => (
+      <a
+        href={post.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group flex items-center justify-between border-b"
+        style="padding-block: var(--space-4); border-color: var(--color-border); text-decoration: none;"
+      >
+        <span
+          class="text-[var(--color-text)] group-hover:text-[var(--color-accent)]"
+          style="font-size: var(--font-size-base); transition: color 150ms; word-break: keep-all;"
+        >
+          {post.title}
+        </span>
+        <span
+          class="text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] shrink-0 ml-[var(--space-4)]"
+          style="font-size: var(--font-size-sm); transition: color 150ms;"
+        >
+          ↗
+        </span>
+      </a>
+    ))}
+  </div>
 </section>

@@ -1,5 +1,29 @@
 ---
+import SectionTitle from '../ui/SectionTitle.astro';
+import Tag from '../ui/Tag.astro';
+import { profile } from '../../data/profile';
+
+const skillEntries = Object.entries(profile.skills);
 ---
-<section id="skills">
-  <h2>기술</h2>
+
+<section id="skills" class="container" style="padding-block: var(--section-padding-y);">
+  <SectionTitle id="skills" number="04">기술</SectionTitle>
+
+  <div class="grid gap-[var(--space-8)]">
+    {skillEntries.map(([category, items]) => (
+      <div class="grid gap-[var(--space-3)]">
+        <p
+          class="text-[var(--color-text-muted)]"
+          style="font-size: var(--font-size-xs); letter-spacing: 0.1em;"
+        >
+          {category.toUpperCase()}
+        </p>
+        <div class="flex flex-wrap gap-[var(--space-2)]">
+          {items.map((skill) => (
+            <Tag>{skill}</Tag>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
 </section>
