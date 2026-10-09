@@ -4,55 +4,67 @@ import { profile } from '../../data/profile';
 ---
 
 <section id="blog" class="container" style="padding-block: var(--section-padding-y);">
-  <SectionTitle id="blog" number="06">기술 블로그</SectionTitle>
+  <div data-animate><SectionTitle id="blog" number="06">기술 블로그</SectionTitle></div>
 
-  <div class="blog-list">
-    {profile.blogPosts.map((post) => (
+  <div>
+    {profile.blogPosts.map((post, index) => (
       <a
+        data-animate
+        data-delay={String(index + 1)}
         href={post.url}
         target="_blank"
         rel="noopener noreferrer"
-        class="blog-link group flex items-center justify-between"
-        style="padding-block: var(--space-8); text-decoration: none; border-top: 1px solid var(--color-border);"
+        class="blog-link"
       >
-        <span
-          class="text-[var(--color-text)]"
-          style="font-size: var(--font-size-xl); font-weight: var(--font-weight-medium); line-height: 1.8; word-break: keep-all;"
-        >
-          {post.title}
-        </span>
-        <span
-          class="shrink-0 text-[var(--color-text-muted)]"
-          style="font-size: var(--font-size-xl); margin-left: var(--space-4);"
-        >
-          ↗
-        </span>
+        <span class="blog-title">{post.title}</span>
+        <span class="blog-arrow">↗</span>
       </a>
     ))}
   </div>
 </section>
 
 <style>
-  .blog-list {
+  .blog-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--space-8);
+    border-top: 1px solid var(--color-border);
+    text-decoration: none;
+    transition: background-color 0.18s ease, padding-inline 0.18s ease;
+    margin-inline: calc(-1 * var(--space-4));
+    padding-inline: var(--space-4);
+  }
+  .blog-link:last-child {
     border-bottom: 1px solid var(--color-border);
   }
-
-  .blog-link {
-    background-color: transparent;
-    transition: background-color 150ms;
-  }
-
   .blog-link:hover {
     background-color: var(--color-surface);
   }
-
-  .blog-link:hover span {
+  .blog-link .blog-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    word-break: keep-all;
+    transition: color 0.18s ease;
+  }
+  .blog-link:hover .blog-title {
     color: var(--color-accent);
   }
-
+  .blog-link .blog-arrow {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: transform 0.18s ease, color 0.18s ease;
+  }
+  .blog-link:hover .blog-arrow {
+    transform: translate(4px, -4px);
+    color: var(--color-accent);
+  }
   @media (prefers-reduced-motion: reduce) {
-    .blog-link {
-      transition: none;
-    }
+    .blog-link,
+    .blog-link .blog-title,
+    .blog-link .blog-arrow { transition: none; }
+    .blog-link:hover .blog-arrow { transform: none; }
   }
 </style>

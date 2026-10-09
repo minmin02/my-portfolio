@@ -14,12 +14,14 @@ const allItems = [
 ---
 
 <section id="certs" class="container" style="padding-block: var(--section-padding-y);">
-  <SectionTitle id="certs" number="05">자격증 · 수상 · 교육</SectionTitle>
+  <div data-animate><SectionTitle id="certs" number="05">자격증 · 수상 · 교육</SectionTitle></div>
 
   <div>
-    {allItems.map((item) => (
+    {allItems.map((item, index) => (
       <div
-        class="flex flex-col md:flex-row"
+        data-animate
+        data-delay={String(index + 1)}
+        class="row-hover flex flex-col md:flex-row"
         style="border-top: 1px solid var(--color-border); padding-block: var(--space-5); gap: var(--space-4);"
       >
         <p

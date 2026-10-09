@@ -1,17 +1,18 @@
 ---
 import SectionTitle from '../ui/SectionTitle.astro';
-import Tag from '../ui/Tag.astro';
 import { profile } from '../../data/profile';
 
 const skillEntries = Object.entries(profile.skills);
 ---
 
 <section id="skills" class="container" style="padding-block: var(--section-padding-y);">
-  <SectionTitle id="skills" number="04">기술</SectionTitle>
+  <div data-animate><SectionTitle id="skills" number="04">기술</SectionTitle></div>
 
   <div>
-    {skillEntries.map(([category, items]) => (
+    {skillEntries.map(([category, items], index) => (
       <div
+        data-animate
+        data-delay={String(index + 1)}
         class="flex flex-col md:flex-row"
         style="border-top: 1px solid var(--color-border); padding-block: var(--space-6); gap: var(--space-4);"
       >
@@ -23,10 +24,31 @@ const skillEntries = Object.entries(profile.skills);
         </p>
         <div class="flex flex-wrap gap-[var(--space-2)]">
           {items.map((skill) => (
-            <Tag>{skill}</Tag>
+            <span class="skill-tag">{skill}</span>
           ))}
         </div>
       </div>
     ))}
   </div>
 </section>
+
+<style>
+  .skill-tag {
+    display: inline-block;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
+    cursor: default;
+  }
+  .skill-tag:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background-color: var(--color-surface);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skill-tag { transition: none; }
+  }
+</style>
