@@ -4,12 +4,14 @@ import { profile } from '../../data/profile';
 ---
 
 <section id="experience" class="container" style="padding-block: var(--section-padding-y);">
-  <SectionTitle id="experience" number="02">경력</SectionTitle>
+  <div data-animate="fade"><SectionTitle id="experience" number="02">경력</SectionTitle></div>
 
   <div class="grid" style="gap: var(--space-12);">
-    {profile.experience.map((exp) => (
+    {profile.experience.map((exp, index) => (
       <div
-        style="border-left: 3px solid var(--color-accent); padding-left: var(--space-6);"
+        data-animate="fade-left"
+        data-delay={String(index + 1)}
+        class="exp-item"
       >
         <div class="grid" style="gap: var(--space-6);">
           <div class="flex flex-col gap-[var(--space-2)] sm:flex-row sm:items-baseline sm:justify-between">
@@ -51,3 +53,18 @@ import { profile } from '../../data/profile';
     ))}
   </div>
 </section>
+
+<style>
+  .exp-item {
+    border-left: 3px solid var(--color-accent);
+    padding-left: var(--space-6);
+    transition: border-left-width 0.2s ease, padding-left 0.2s ease;
+  }
+  .exp-item:hover {
+    border-left-width: 5px;
+    padding-left: calc(var(--space-6) - 2px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .exp-item { transition: none; }
+  }
+</style>

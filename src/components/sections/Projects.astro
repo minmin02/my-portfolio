@@ -8,14 +8,16 @@ const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <section id="projects" class="container" style="padding-block: var(--section-padding-y);">
-  <SectionTitle id="projects" number="03">프로젝트</SectionTitle>
+  <div data-animate="fade"><SectionTitle id="projects" number="03">프로젝트</SectionTitle></div>
 
   <div>
-    {projects.map((project) => (
+    {projects.map((project, index) => (
       <a
+        data-animate
+        data-delay={String(index + 1)}
         href={`${import.meta.env.BASE_URL}/projects/${project.id}`}
-        class="group flex flex-col md:flex-row md:items-baseline"
-        style="text-decoration: none; border-top: 1px solid var(--color-border); padding-block: var(--space-8); gap: var(--space-6);"
+        class="project-row group flex flex-col md:flex-row md:items-baseline"
+        style="border-top: 1px solid var(--color-border); padding-block: var(--space-8); gap: var(--space-6);"
       >
         {/* 번호 레이블 */}
         <span
@@ -76,3 +78,19 @@ const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
     ))}
   </div>
 </section>
+
+<style>
+  .project-row {
+    text-decoration: none;
+    display: flex;
+    transition: background-color 0.18s ease, padding-left 0.18s ease;
+  }
+  .project-row:hover {
+    background-color: var(--color-surface);
+    padding-left: var(--space-4);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .project-row { transition: none; }
+    .project-row:hover { padding-left: 0; }
+  }
+</style>
