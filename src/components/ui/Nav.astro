@@ -1,0 +1,141 @@
+---
+// Nav.astro — sticky navigation bar
+---
+
+<nav id="site-nav" aria-label="사이트 내비게이션">
+  <div class="nav-inner container">
+    <span class="nav-name">김민규</span>
+
+    <div class="nav-right">
+      <ul class="nav-links" aria-label="페이지 섹션 링크">
+        <li><a href="#about">소개</a></li>
+        <li><a href="#experience">경력</a></li>
+        <li><a href="#projects">프로젝트</a></li>
+        <li><a href="#skills">기술</a></li>
+        <li><a href="#contact">연락</a></li>
+      </ul>
+
+      <button
+        id="theme-toggle"
+        aria-label="라이트/다크 모드 전환"
+        class="theme-btn"
+      >
+        <span id="theme-icon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<style>
+  #site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: color-mix(in srgb, var(--color-bg) 95%, transparent);
+    border-bottom: 1px solid var(--color-border);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--space-3);
+  }
+
+  .nav-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-links a {
+      transition: none;
+    }
+  }
+
+  .nav-links a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .theme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    line-height: 1;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-btn {
+      transition: none;
+    }
+  }
+
+  .theme-btn:hover {
+    background: var(--color-surface-2);
+    border-color: var(--color-text-muted);
+  }
+
+  /* 모바일: 768px 미만에서 섹션 링크 숨기기 */
+  @media (max-width: 767px) {
+    .nav-links {
+      display: none;
+    }
+
+    .nav-right {
+      gap: var(--space-2);
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    var icon = document.getElementById('theme-icon');
+
+    function updateIcon() {
+      icon.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+    }
+
+    updateIcon();
+
+    btn.addEventListener('click', function () {
+      var isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateIcon();
+    });
+  })();
+</script>
