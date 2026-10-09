@@ -1,5 +1,45 @@
 ---
+import SectionTitle from '../ui/SectionTitle.astro';
+import { profile } from '../../data/profile';
+
+const displayGpa = profile.education.gpa.includes('TODO')
+  ? profile.education.gpa.split(' (TODO')[0]
+  : profile.education.gpa;
 ---
-<section id="about">
-  <h2>소개</h2>
+
+<section id="about" class="container" style="padding-block: var(--section-padding-y);">
+  <SectionTitle id="about" number="01">소개</SectionTitle>
+
+  <div class="grid gap-[var(--space-16)] max-w-3xl">
+    <p
+      class="text-[var(--color-text)]"
+      style="font-size: var(--font-size-xl); line-height: 1.8; word-break: keep-all;"
+    >
+      {profile.description}
+    </p>
+
+    <div>
+      <p
+        class="text-[var(--color-text-muted)]"
+        style="font-size: var(--font-size-xs); letter-spacing: 0.1em; margin-bottom: var(--space-4);"
+      >
+        EDUCATION
+      </p>
+      <div class="flex flex-col" style="gap: var(--space-2);">
+        <span
+          class="text-[var(--color-text)] font-[var(--font-weight-medium)]"
+          style="font-size: var(--font-size-base);"
+        >
+          {profile.education.school}
+        </span>
+        <span class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
+          {profile.education.major}
+        </span>
+        <span class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
+          {profile.education.graduation}
+          {displayGpa && ` · GPA ${displayGpa}`}
+        </span>
+      </div>
+    </div>
+  </div>
 </section>
