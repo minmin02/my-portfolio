@@ -9,12 +9,15 @@ const skillEntries = Object.entries(profile.skills);
 <section id="skills" class="container" style="padding-block: var(--section-padding-y);">
   <SectionTitle id="skills" number="04">기술</SectionTitle>
 
-  <div class="grid gap-[var(--space-8)]">
+  <div>
     {skillEntries.map(([category, items]) => (
-      <div class="grid gap-[var(--space-3)]">
+      <div
+        class="flex flex-col md:flex-row"
+        style="border-top: 1px solid var(--color-border); padding-block: var(--space-6); gap: var(--space-4);"
+      >
         <p
-          class="text-[var(--color-text-muted)]"
-          style="font-size: var(--font-size-xs); letter-spacing: 0.1em;"
+          class="shrink-0 text-[var(--color-text-muted)]"
+          style="font-size: var(--font-size-xs); letter-spacing: 0.1em; min-width: 8rem; padding-top: var(--space-1);"
         >
           {category.toUpperCase()}
         </p>
