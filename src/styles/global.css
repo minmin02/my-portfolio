@@ -112,3 +112,127 @@ section {
   padding-block: var(--section-padding-y);
   border-bottom: 1px solid var(--color-border);
 }
+
+/* ===================================================
+   스크롤 진입 애니메이션
+   =================================================== */
+
+[data-animate] {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-animate="fade-left"] {
+  transform: translateX(-1.5rem);
+}
+
+[data-animate="fade"] {
+  transform: none;
+}
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+[data-delay="1"] { transition-delay: 0.08s; }
+[data-delay="2"] { transition-delay: 0.16s; }
+[data-delay="3"] { transition-delay: 0.24s; }
+[data-delay="4"] { transition-delay: 0.32s; }
+[data-delay="5"] { transition-delay: 0.40s; }
+[data-delay="6"] { transition-delay: 0.48s; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===================================================
+   Hero 진입 애니메이션 (페이지 로드 시)
+   =================================================== */
+
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-animate {
+  animation: hero-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* 각 자식에 딜레이 — 직접 .hero-animate를 가진 요소에만 적용 */
+.hero-animate-1 { animation: hero-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.05s both; }
+.hero-animate-2 { animation: hero-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s  both; }
+.hero-animate-3 { animation: hero-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.35s both; }
+.hero-animate-4 { animation: hero-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.5s  both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate,
+  .hero-animate-1,
+  .hero-animate-2,
+  .hero-animate-3,
+  .hero-animate-4 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===================================================
+   인터랙션 유틸
+   =================================================== */
+
+/* 카드 hover — 위로 살짝 뜨기 + 보더 강조 */
+.card-lift {
+  transition: transform 0.22s ease, border-color 0.22s ease;
+  cursor: pointer;
+}
+.card-lift:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-text-muted) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-lift { transition: none; }
+  .card-lift:hover { transform: none; }
+}
+
+/* 텍스트 언더라인 슬라이드 */
+.underline-slide {
+  position: relative;
+  text-decoration: none !important;
+}
+.underline-slide::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.25s ease;
+}
+.underline-slide:hover::after {
+  width: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .underline-slide::after { transition: none; }
+}
+
+/* 행(row) 전체 hover 하이라이트 */
+.row-hover {
+  transition: background-color 0.18s ease, padding-left 0.18s ease;
+}
+.row-hover:hover {
+  background-color: var(--color-surface);
+  padding-left: var(--space-4);
+}
+@media (prefers-reduced-motion: reduce) {
+  .row-hover { transition: none; }
+  .row-hover:hover { padding-left: 0; }
+}
