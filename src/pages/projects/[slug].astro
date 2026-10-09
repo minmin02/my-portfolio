@@ -14,6 +14,8 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { title, period, org, role, stack, summary, github, award } = project.data;
+
+const displayRole = role.includes('TODO') ? role.split(/\s*—\s*TODO/)[0].trim() : role;
 ---
 
 <Base title={`${title} — 김민규 포트폴리오`} description={summary}>
@@ -67,7 +69,7 @@ const { title, period, org, role, stack, summary, github, award } = project.data
               class="text-[var(--color-text)]"
               style="font-size: var(--font-size-base);"
             >
-              {role}
+              {displayRole}
             </span>
           </div>
 
