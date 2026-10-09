@@ -1,9 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import SectionTitle from '../ui/SectionTitle.astro';
-import Card from '../ui/Card.astro';
 import Tag from '../ui/Tag.astro';
-import Button from '../ui/Button.astro';
 
 const allProjects = await getCollection('projects');
 const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
@@ -12,53 +10,68 @@ const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
 <section id="projects" class="container" style="padding-block: var(--section-padding-y);">
   <SectionTitle id="projects" number="03">프로젝트</SectionTitle>
 
-  <div class="grid gap-[var(--space-6)] sm:grid-cols-2">
+  <div>
     {projects.map((project) => (
       <a
         href={`${import.meta.env.BASE_URL}/projects/${project.id}`}
-        style="text-decoration: none; display: block;"
+        class="group flex flex-col md:flex-row md:items-baseline"
+        style="text-decoration: none; border-top: 1px solid var(--color-border); padding-block: var(--space-8); gap: var(--space-6);"
       >
-        <Card class="h-full hover:border-[var(--color-text-muted)] transition-colors duration-150">
-          <div class="grid gap-[var(--space-4)] h-full">
-            <div class="grid gap-[var(--space-2)]">
-              <div class="flex items-start justify-between gap-[var(--space-2)]">
-                <h3
-                  class="text-[var(--color-text)] font-[var(--font-weight-medium)]"
-                  style="font-size: var(--font-size-base); word-break: keep-all;"
-                >
-                  {project.data.title}
-                </h3>
-                {project.data.award && (
-                  <span
-                    class="text-[var(--color-accent)] shrink-0"
-                    style="font-size: var(--font-size-xs);"
-                  >
-                    🏆
-                  </span>
-                )}
-              </div>
-              <p
-                class="text-[var(--color-text-muted)]"
-                style="font-size: var(--font-size-xs); letter-spacing: 0.06em;"
-              >
-                {project.data.period} · {project.data.org}
-              </p>
-            </div>
+        {/* 번호 레이블 */}
+        <span
+          class="text-[var(--color-text-muted)] shrink-0"
+          style="font-size: var(--font-size-sm); width: 3rem; line-height: 1.8;"
+        >
+          {String(project.data.order).padStart(2, '0')}
+        </span>
 
-            <p
-              class="text-[var(--color-text-muted)] flex-1"
-              style="font-size: var(--font-size-sm); line-height: 1.7; word-break: keep-all;"
-            >
-              {project.data.summary}
-            </p>
-
-            <div class="flex flex-wrap gap-[var(--space-1)]">
-              {project.data.stack.map((s) => (
-                <Tag>{s}</Tag>
-              ))}
-            </div>
+        {/* 중앙: 제목 + 설명 + 태그 */}
+        <div class="flex-1 grid" style="gap: var(--space-4);">
+          <h3
+            class="text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-150"
+            style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); word-break: keep-all; line-height: 1.8;"
+          >
+            {project.data.title}
+          </h3>
+          <p
+            class="text-[var(--color-text-muted)]"
+            style="font-size: var(--font-size-sm); line-height: 1.8; word-break: keep-all;"
+          >
+            {project.data.summary}
+          </p>
+          <div class="flex flex-wrap" style="gap: var(--space-1);">
+            {project.data.stack.map((s) => (
+              <Tag>{s}</Tag>
+            ))}
           </div>
-        </Card>
+        </div>
+
+        {/* 오른쪽: 기간·조직 + award */}
+        <div
+          class="flex flex-row md:flex-col md:items-end shrink-0"
+          style="gap: var(--space-2);"
+        >
+          <p
+            class="text-[var(--color-text-muted)]"
+            style="font-size: var(--font-size-xs); letter-spacing: 0.06em; line-height: 1.8;"
+          >
+            {project.data.period}
+          </p>
+          <p
+            class="text-[var(--color-text-muted)]"
+            style="font-size: var(--font-size-xs); letter-spacing: 0.06em; line-height: 1.8;"
+          >
+            {project.data.org}
+          </p>
+          {project.data.award && (
+            <span
+              class="text-[var(--color-accent)]"
+              style="font-size: var(--font-size-xs);"
+            >
+              🏆 {project.data.award}
+            </span>
+          )}
+        </div>
       </a>
     ))}
   </div>

@@ -1,25 +1,29 @@
 ---
 import SectionTitle from '../ui/SectionTitle.astro';
-import Card from '../ui/Card.astro';
 import { profile } from '../../data/profile';
 ---
 
 <section id="experience" class="container" style="padding-block: var(--section-padding-y);">
   <SectionTitle id="experience" number="02">경력</SectionTitle>
 
-  <div class="grid gap-[var(--space-8)]">
+  <div class="grid" style="gap: var(--space-12);">
     {profile.experience.map((exp) => (
-      <Card>
-        <div class="grid gap-[var(--space-6)]">
-          <div class="flex flex-col gap-[var(--space-1)] sm:flex-row sm:items-baseline sm:justify-between">
-            <div class="flex flex-col gap-[var(--space-1)]">
+      <div
+        style="border-left: 3px solid var(--color-accent); padding-left: var(--space-6);"
+      >
+        <div class="grid" style="gap: var(--space-6);">
+          <div class="flex flex-col gap-[var(--space-2)] sm:flex-row sm:items-baseline sm:justify-between">
+            <div class="flex flex-col" style="gap: var(--space-1);">
               <span
-                class="text-[var(--color-text)] font-[var(--font-weight-medium)]"
-                style="font-size: var(--font-size-lg);"
+                class="text-[var(--color-text)]"
+                style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); word-break: keep-all; line-height: 1.8;"
               >
                 {exp.company}
               </span>
-              <span class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
+              <span
+                class="text-[var(--color-text-muted)]"
+                style="font-size: var(--font-size-sm); line-height: 1.8;"
+              >
                 {exp.team} · {exp.role} · {exp.type}
               </span>
             </div>
@@ -31,18 +35,19 @@ import { profile } from '../../data/profile';
             </span>
           </div>
 
-          <ul class="grid gap-[var(--space-3)]" style="padding-left: var(--space-5); list-style: disc;">
+          <ul class="grid" style="gap: var(--space-3); list-style: none; padding-left: 0;">
             {exp.bullets.map((bullet) => (
               <li
-                class="text-[var(--color-text)]"
+                class="text-[var(--color-text)] flex gap-[var(--space-3)]"
                 style="font-size: var(--font-size-base); line-height: 1.8; word-break: keep-all;"
               >
-                {bullet}
+                <span class="text-[var(--color-accent)] shrink-0" aria-hidden="true">—</span>
+                <span>{bullet}</span>
               </li>
             ))}
           </ul>
         </div>
-      </Card>
+      </div>
     ))}
   </div>
 </section>
