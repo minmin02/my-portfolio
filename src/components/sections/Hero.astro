@@ -1,5 +1,50 @@
 ---
+import Button from '../ui/Button.astro';
+import { profile } from '../../data/profile';
 ---
-<section id="hero">
-  <h2>소개</h2>
+
+<section
+  id="hero"
+  class="min-h-screen flex flex-col justify-center container"
+  style="padding-block: var(--space-20); border-bottom: none;"
+>
+  <div class="grid gap-[var(--space-16)] max-w-4xl">
+    <div>
+      <p
+        class="mb-[var(--space-3)] text-[var(--font-size-sm)] text-[var(--color-text-muted)]"
+        style="letter-spacing: 0.08em;"
+      >
+        {profile.tagline}
+      </p>
+      <h1
+        class="font-[var(--font-weight-bold)] text-[var(--color-text)] leading-none"
+        style="font-size: clamp(3rem, 7vw, 5.5rem); letter-spacing: -0.03em;"
+      >
+        {profile.name}
+      </h1>
+    </div>
+
+    <hr />
+
+    <div class="flex flex-col gap-[var(--space-8)] sm:flex-row sm:items-end sm:justify-between">
+      <p
+        class="text-[var(--color-text-muted)] max-w-md"
+        style="font-size: var(--font-size-lg); line-height: 1.8;"
+      >
+        {profile.description}
+      </p>
+
+      <div class="flex flex-col gap-[var(--space-2)] items-start sm:items-end shrink-0">
+        <Button href={profile.contact.github} target="_blank" variant="ghost" size="sm">
+          GitHub ↗
+        </Button>
+        <Button href={profile.contact.velog} target="_blank" variant="ghost" size="sm">
+          Velog ↗
+        </Button>
+        <Button href={`mailto:${profile.contact.email}`} variant="ghost" size="sm">
+          {profile.contact.email}
+        </Button>
+      </div>
+    </div>
+  </div>
 </section>

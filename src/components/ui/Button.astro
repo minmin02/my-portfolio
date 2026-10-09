@@ -1,0 +1,28 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  target?: string;
+  type?: 'button' | 'submit';
+}
+const { variant = 'primary', size = 'md', href, target, type = 'button' } = Astro.props;
+
+const base = 'inline-flex items-center justify-center font-medium transition-colors duration-150 cursor-pointer border';
+const variants = {
+  primary:   'bg-[var(--color-text)] text-[var(--color-bg)] border-[var(--color-text)] hover:bg-[var(--color-accent)] hover:border-[var(--color-accent)] hover:text-[var(--color-bg)]',
+  secondary: 'bg-transparent text-[var(--color-text)] border-[var(--color-text)] hover:bg-[var(--color-text)] hover:text-[var(--color-bg)]',
+  ghost:     'bg-transparent text-[var(--color-text-muted)] border-transparent hover:text-[var(--color-accent)] hover:border-transparent',
+};
+const sizes = {
+  sm: 'text-[var(--font-size-sm)] px-[var(--space-3)] py-[var(--space-1)]',
+  md: 'text-[var(--font-size-base)] px-[var(--space-4)] py-[var(--space-2)]',
+  lg: 'text-[var(--font-size-lg)] px-[var(--space-6)] py-[var(--space-3)]',
+};
+const cls = [base, variants[variant], sizes[size]].join(' ');
+---
+
+{href
+  ? <a href={href} target={target} class={cls}><slot /></a>
+  : <button type={type} class={cls}><slot /></button>
+}

@@ -1,0 +1,22 @@
+---
+export interface Props {
+  id?: string;
+  number?: string;
+}
+const { id, number } = Astro.props;
+---
+
+<div class="mb-[var(--space-12)] flex items-baseline gap-[var(--space-4)]">
+  {number && (
+    <span class="text-[var(--font-size-sm)] text-[var(--color-text-muted)] font-[var(--font-weight-normal)] tabular-nums">
+      {number}
+    </span>
+  )}
+  <h2
+    id={id}
+    class="text-[var(--font-size-base)] font-[var(--font-weight-medium)] tracking-wide text-[var(--color-text)]"
+  >
+    <slot />
+  </h2>
+  <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+</div>
