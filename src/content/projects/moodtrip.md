@@ -1,0 +1,12 @@
+---
+title: "MoodTrip"
+period: "2025.07 ~ 2025.10"
+org: "한국관광공사 관광데이터 활용 공모전"
+role: "백엔드 개발 — TODO: 맡은 기능"
+stack: ["Spring Boot", "JPA", "QueryDSL", "MariaDB", "Redis", "Docker"]
+summary: "관광 데이터를 활용해 감정에 맞는 여행지를 추천하고, 비슷한 감정의 여행자끼리 동행을 매칭하는 웹 서비스"
+github: "https://github.com/infiniment/MoodTrip"
+order: 3
+---
+
+관광 데이터를 활용해 감정에 맞는 여행지를 추천하고, 비슷한 감정의 여행자끼리 동행을 매칭하는 웹 서비스
