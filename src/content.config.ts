@@ -12,6 +12,8 @@ const projects = defineCollection({
     stack: z.array(z.string()),
     summary: z.string(),
     github: z.string().optional(),
+    image: z.string().optional(),
+    notion: z.string().optional(),
     order: z.number(),
   }),
 });

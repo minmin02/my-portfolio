@@ -1,28 +1,29 @@
 ---
-import SectionTitle from '../ui/SectionTitle.astro';
 import { profile } from '../../data/profile';
 
-const skillEntries = Object.entries(profile.skills);
+const allSkills = Object.entries(profile.skills).flatMap(([cat, items]) =>
+  items.map((s) => ({ category: cat, skill: s }))
+);
+const ticker = [...allSkills, ...allSkills];
 ---
 
-<section id="skills" class="container" style="padding-block: var(--section-padding-y);">
-  <div data-animate><SectionTitle id="skills" number="04">기술</SectionTitle></div>
+<section id="skills" class="skills-section">
+  <div class="container">
+    <h2
+      class="section-title"
+      data-animate
+      style="font-size: var(--font-size-sm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--space-12);"
+    >
+      Skills
+    </h2>
+  </div>
 
-  <div>
-    {skillEntries.map(([category, items], index) => (
-      <div
-        data-animate
-        data-delay={String(index + 1)}
-        class="flex flex-col md:flex-row"
-        style="border-top: 1px solid var(--color-border); padding-block: var(--space-6); gap: var(--space-4);"
-      >
-        <p
-          class="shrink-0 text-[var(--color-text-muted)]"
-          style="font-size: var(--font-size-xs); letter-spacing: 0.1em; min-width: 8rem; padding-top: var(--space-1);"
-        >
-          {category.toUpperCase()}
-        </p>
-        <div class="flex flex-wrap gap-[var(--space-2)]">
+  <!-- 카테고리별 행 -->
+  <div class="skills-categories container" data-animate data-delay="1">
+    {Object.entries(profile.skills).map(([category, items]) => (
+      <div class="skill-row">
+        <span class="skill-cat">{category}</span>
+        <div class="skill-tags">
           {items.map((skill) => (
             <span class="skill-tag">{skill}</span>
           ))}
@@ -30,25 +31,133 @@ const skillEntries = Object.entries(profile.skills);
       </div>
     ))}
   </div>
+
+  <!-- 애니메이션 티커 -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track">
+      {ticker.map((item) => (
+        <span class="ticker-item">
+          <span class="ticker-cat">{item.category}</span>
+          <span class="ticker-skill">{item.skill}</span>
+          <span class="ticker-dot">·</span>
+        </span>
+      ))}
+    </div>
+  </div>
 </section>
 
 <style>
+  .skills-section {
+    padding-block: var(--section-padding-y);
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .skills-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: var(--space-12);
+  }
+
+  .skill-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 640px) {
+    .skill-row {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-6);
+    }
+  }
+
+  .skill-cat {
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    min-width: 6rem;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
   .skill-tag {
     display: inline-block;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
-    padding: var(--space-1) var(--space-2);
+    padding: var(--space-1) var(--space-3);
     border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
     color: var(--color-text-muted);
     transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
     cursor: default;
   }
+
   .skill-tag:hover {
     border-color: var(--color-accent);
     color: var(--color-accent);
     background-color: var(--color-surface);
   }
+
   @media (prefers-reduced-motion: reduce) {
     .skill-tag { transition: none; }
+  }
+
+  /* ─── Ticker ─── */
+  .ticker-wrap {
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--space-4);
+    overflow: hidden;
+  }
+
+  .ticker-track {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 30s linear infinite;
+  }
+
+  @keyframes ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none;
+    }
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+
+  .ticker-cat {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.06em;
+  }
+
+  .ticker-skill {
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .ticker-dot {
+    color: var(--color-accent);
   }
 </style>

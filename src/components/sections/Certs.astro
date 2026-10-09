@@ -1,20 +1,23 @@
 ---
-import SectionTitle from '../ui/SectionTitle.astro';
 import { profile } from '../../data/profile';
 
 const certs = profile.certifications.filter((c) => !c.includes('TODO'));
 const awards = profile.awards.filter((a) => !a.includes('TODO'));
-const eduPrograms = profile.educationPrograms.filter((e) => !e.includes('TODO'));
 
 const allItems = [
   ...certs.map((text) => ({ label: 'CERT', text })),
   ...awards.map((text) => ({ label: 'AWARD', text })),
-  ...eduPrograms.map((text) => ({ label: 'EDUCATION', text })),
 ];
 ---
 
-<section id="certs" class="container" style="padding-block: var(--section-padding-y);">
-  <div data-animate><SectionTitle id="certs" number="05">자격증 · 수상 · 교육</SectionTitle></div>
+<section id="certs" class="container">
+  <h2
+    class="section-title"
+    data-animate
+    style="font-size: var(--font-size-sm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--space-12);"
+  >
+    Certificate &amp; Award
+  </h2>
 
   <div>
     {allItems.map((item, index) => (
@@ -26,7 +29,7 @@ const allItems = [
       >
         <p
           class="shrink-0 text-[var(--color-text-muted)]"
-          style="font-size: var(--font-size-xs); letter-spacing: 0.1em; min-width: 8rem; padding-top: var(--space-1);"
+          style="font-size: var(--font-size-xs); letter-spacing: 0.1em; min-width: 6rem; padding-top: var(--space-1);"
         >
           {item.label}
         </p>

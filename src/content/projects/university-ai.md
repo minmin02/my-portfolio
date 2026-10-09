@@ -1,12 +1,13 @@
 ---
-title: "질문 하나로 끝내는 대학 생활"
+title: "Hansung 메타 에이전트 서비스"
 period: "2026.04 ~ 2026.06"
 org: "제1회 한성 AX 프런티어 챌린지"
 award: "우수상"
-role: "에이전트 개발 및 백엔드 개발 (AI 코딩 도구 활용) — TODO: 맡은 에이전트나 기능"
+role: "AI | 에이전트 개발 · 백엔드 · RAG · Spring"
 stack: ["Spring", "Python", "RAG", "pgvector"]
 summary: "대학 홈페이지·공지·학술정보관 등 흩어진 정보를 질문 하나로 연결하는 메타 에이전트 기반 AI 서비스"
-order: 1
+image: "hansung"
+order: 5
 ---
 
 대학 홈페이지·공지·학술정보관 등 흩어진 정보를 질문 하나로 연결하는 메타 에이전트 기반 AI 서비스

@@ -1,71 +1,65 @@
 ---
-import SectionTitle from '../ui/SectionTitle.astro';
-import Button from '../ui/Button.astro';
 import { profile } from '../../data/profile';
-
-const displayGpa = profile.education.gpa.includes('TODO')
-  ? profile.education.gpa.split(' (TODO')[0]
-  : profile.education.gpa;
 ---
 
-<section id="about" class="container" style="padding-block: var(--section-padding-y);">
-  <div data-animate><SectionTitle id="about" number="01">소개</SectionTitle></div>
+<section id="about" class="container">
+  <h2
+    class="section-title"
+    data-animate
+    style="font-size: var(--font-size-sm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--space-12);"
+  >
+    About Me
+  </h2>
 
   <div class="about-grid">
-    <!-- 왼쪽: 자기소개 텍스트 -->
-    <div class="about-description" data-animate="fade-left" data-delay="1">
-      <p
-        class="text-[var(--color-text)]"
-        style="font-size: var(--font-size-xl); line-height: 1.8; word-break: keep-all;"
+    <!-- 왼쪽: 큰 이름 + 소개 텍스트 -->
+    <div class="about-left">
+      <h3
+        class="about-name gradient-text"
+        data-animate="fade-left"
+        data-delay="1"
       >
-        {profile.description}
-      </p>
+        {profile.nameEn}
+      </h3>
+
+      <div class="about-lines" data-animate="fade-left" data-delay="2">
+        {profile.aboutLines.map((line) => (
+          <p class="about-line">{line}</p>
+        ))}
+      </div>
     </div>
 
-    <!-- 오른쪽: EDUCATION + 연락처 -->
-    <div class="about-sidebar" data-animate data-delay="2">
-      <div>
-        <p
-          class="text-[var(--color-text-muted)]"
-          style="font-size: var(--font-size-xs); letter-spacing: 0.1em; margin-bottom: var(--space-4);"
+    <!-- 오른쪽: 연락처 -->
+    <div class="about-right" data-animate data-delay="3">
+      <p
+        class="text-[var(--color-text-muted)]"
+        style="font-size: var(--font-size-xs); letter-spacing: 0.1em; margin-bottom: var(--space-4);"
+      >
+        CONTACT
+      </p>
+      <div class="flex flex-col" style="gap: var(--space-2);">
+        <a
+          href={profile.contact.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-link underline-slide"
         >
-          EDUCATION
-        </p>
-        <div class="flex flex-col" style="gap: var(--space-2);">
-          <span
-            class="text-[var(--color-text)] font-[var(--font-weight-medium)]"
-            style="font-size: var(--font-size-base);"
-          >
-            {profile.education.school}
-          </span>
-          <span class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
-            {profile.education.major}
-          </span>
-          <span class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
-            {profile.education.graduation}
-            {displayGpa && ` · GPA ${displayGpa}`}
-          </span>
-        </div>
-      </div>
-
-      <div style="margin-top: var(--space-8);">
-        <p
-          class="text-[var(--color-text-muted)]"
-          style="font-size: var(--font-size-xs); letter-spacing: 0.1em; margin-bottom: var(--space-4);"
+          GitHub ↗
+        </a>
+        <a
+          href={profile.contact.velog}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-link underline-slide"
         >
-          CONTACT
-        </p>
-        <div class="flex flex-col items-start" style="gap: var(--space-1);">
-          <Button href={profile.contact.github} target="_blank" variant="ghost" size="sm">
-            GitHub ↗
-          </Button>
-          <Button href={profile.contact.velog} target="_blank" variant="ghost" size="sm">
-            Velog ↗
-          </Button>
-          <Button href={`mailto:${profile.contact.email}`} variant="ghost" size="sm">
-            {profile.contact.email}
-          </Button>
-        </div>
+          Velog ↗
+        </a>
+        <a
+          href={`mailto:${profile.contact.email}`}
+          class="contact-link underline-slide"
+        >
+          {profile.contact.email}
+        </a>
       </div>
     </div>
   </div>
@@ -74,13 +68,63 @@ const displayGpa = profile.education.gpa.includes('TODO')
 <style>
   .about-grid {
     display: grid;
-    gap: var(--space-16);
+    gap: var(--space-12);
   }
 
   @media (min-width: 768px) {
     .about-grid {
-      grid-template-columns: 2fr 1fr;
-      gap: var(--space-12);
+      grid-template-columns: 3fr 1fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+  }
+
+  .about-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .about-name {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .about-lines {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .about-line {
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    word-break: keep-all;
+  }
+
+  .about-right {
+    padding-top: var(--space-2);
+  }
+
+  .contact-link {
+    display: inline-block;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .contact-link:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-link {
+      transition: none;
     }
   }
 </style>

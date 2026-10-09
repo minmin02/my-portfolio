@@ -1,0 +1,114 @@
+---
+const series = [
+  {
+    label: '쿠버네티스',
+    desc: '인턴이 쌓아가는 것들',
+    url: 'https://velog.io/@minmin02/series/%EC%9D%B8%ED%84%B4%EC%9D%B4-%EC%8C%93%EC%95%84%EA%B0%80%EB%8A%94-%EA%B2%83%EB%93%A4',
+  },
+  {
+    label: '네트워크',
+    desc: 'NetWork',
+    url: 'https://velog.io/@minmin02/series/NetWork',
+  },
+  {
+    label: 'Spring',
+    desc: '직접 맛보고 적어보는 Spring FrameWork',
+    url: 'https://velog.io/@minmin02/series/%EC%A7%81%EC%A0%91-%EB%A7%9B%EB%B3%B4%EA%B3%A0-%EC%A0%81%EC%96%B4%EB%B3%B4%EB%8A%94-Spring-FrameWork',
+  },
+  {
+    label: 'Linux',
+    desc: 'Linux',
+    url: 'https://velog.io/@minmin02/series/Linux',
+  },
+];
+---
+
+<section id="study" class="container">
+  <h2
+    class="section-title"
+    data-animate
+    style="font-size: var(--font-size-sm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--space-12);"
+  >
+    Study
+  </h2>
+
+  <div class="study-grid">
+    {series.map((s, i) => (
+      <a
+        href={s.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="study-card card-lift"
+        data-animate
+        data-delay={String(i + 1)}
+      >
+        <div class="study-label">{s.label}</div>
+        <div class="study-desc">{s.desc}</div>
+        <div class="study-arrow" aria-hidden="true">↗</div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .study-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .study-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .study-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    color: var(--color-text);
+    text-decoration: none;
+    position: relative;
+  }
+
+  .study-card:hover {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .study-label {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .study-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .study-arrow {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+
+  .study-card:hover .study-arrow {
+    color: var(--color-accent);
+    transform: translate(2px, -2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .study-arrow {
+      transition: none;
+    }
+  }
+</style>

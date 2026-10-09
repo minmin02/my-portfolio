@@ -1,26 +1,26 @@
 ---
-import Button from '../ui/Button.astro';
 import { profile } from '../../data/profile';
+
+const resumeUrl = '#';
 ---
 
-<section id="contact" class="container" style="padding-block: var(--section-padding-y);">
-  <p
-    data-animate="fade"
-    class="text-[var(--color-text-muted)]"
-    style="font-size: var(--font-size-xs); letter-spacing: 0.1em; margin-bottom: var(--space-8);"
+<section id="contact" class="container">
+  <h2
+    class="section-title"
+    data-animate
+    style="font-size: var(--font-size-sm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--space-12);"
   >
-    07 — 연락
-  </p>
+    Contact
+  </h2>
 
-  <div class="grid gap-[var(--space-8)]">
-    <h2
+  <div class="grid gap-[var(--space-10)]">
+    <p
       data-animate
       data-delay="1"
-      class="text-[var(--color-text)] font-[var(--font-weight-bold)]"
-      style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.3; word-break: keep-all;"
+      class="contact-tagline"
     >
-      함께 일하고 싶으시다면
-    </h2>
+      함께 일하고 싶으시다면 편하게 연락주세요.
+    </p>
 
     <a
       href={`mailto:${profile.contact.email}`}
@@ -31,23 +31,31 @@ import { profile } from '../../data/profile';
       {profile.contact.email}
     </a>
 
-    <div class="flex flex-wrap gap-[var(--space-3)]" data-animate data-delay="3">
-      <Button href={`mailto:${profile.contact.email}`} variant="primary" size="lg">
-        이메일 보내기
-      </Button>
-      <Button href={profile.contact.github} target="_blank" variant="secondary" size="lg">
-        GitHub ↗
-      </Button>
-      <Button href={profile.contact.velog} target="_blank" variant="ghost" size="lg">
-        Velog ↗
-      </Button>
+    <div class="contact-links" data-animate data-delay="3">
+      <a href={resumeUrl} class="contact-pill" target={resumeUrl !== '#' ? '_blank' : undefined} rel={resumeUrl !== '#' ? 'noopener noreferrer' : undefined}>
+        RESUME ↗
+      </a>
+      <a href={profile.contact.velog} class="contact-pill" target="_blank" rel="noopener noreferrer">
+        BLOG ↗
+      </a>
+      <a href={profile.contact.github} class="contact-pill" target="_blank" rel="noopener noreferrer">
+        GITHUB ↗
+      </a>
     </div>
   </div>
 </section>
 
 <style>
+  .contact-tagline {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    word-break: keep-all;
+    line-height: 1.3;
+  }
+
   .contact-email {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-xl);
     font-weight: var(--font-weight-medium);
     color: var(--color-accent);
     text-decoration: none;
@@ -57,5 +65,41 @@ import { profile } from '../../data/profile';
 
   .contact-email:hover {
     color: var(--color-accent-hover);
+  }
+
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .contact-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
+  }
+
+  .contact-pill:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background-color: var(--color-surface);
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-pill {
+      transition: none;
+    }
+    .contact-email {
+      transition: none;
+    }
   }
 </style>

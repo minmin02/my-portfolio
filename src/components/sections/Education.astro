@@ -1,0 +1,65 @@
+---
+import { profile } from '../../data/profile';
+---
+
+<section id="education" class="container">
+  <h2
+    class="section-title"
+    data-animate
+    style="font-size: var(--font-size-sm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--space-12);"
+  >
+    Education
+  </h2>
+
+  <div class="edu-grid">
+    <!-- 학력 -->
+    <div class="edu-item row-hover" data-animate data-delay="1" style="padding: var(--space-4) 0; border-bottom: 1px solid var(--color-border);">
+      <div class="edu-main">
+        <span class="edu-name" style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-text);">
+          {profile.education.school}
+        </span>
+        <span class="edu-badge" style="font-size: var(--font-size-xs); color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.1em 0.6em; margin-left: var(--space-3);">
+          학력
+        </span>
+      </div>
+      <div style="margin-top: var(--space-1); color: var(--color-text-muted); font-size: var(--font-size-sm);">
+        {profile.education.major}
+      </div>
+      <div style="color: var(--color-text-muted); font-size: var(--font-size-sm);">
+        {profile.education.graduation}
+      </div>
+    </div>
+
+    <!-- 교육 프로그램 -->
+    {profile.educationPrograms.map((prog, i) => (
+      <div class="edu-item row-hover" data-animate data-delay={String(i + 2)} style="padding: var(--space-4) 0; border-bottom: 1px solid var(--color-border);">
+        <div class="edu-main">
+          <span class="edu-name" style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-text);">
+            {prog.split('·')[0].trim()}
+          </span>
+          <span class="edu-badge" style="font-size: var(--font-size-xs); color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.1em 0.6em; margin-left: var(--space-3);">
+            교육
+          </span>
+        </div>
+        <div style="margin-top: var(--space-1); color: var(--color-text-muted); font-size: var(--font-size-sm);">
+          {prog.split('·').slice(1).join('·').trim()}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .edu-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .edu-main {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+</style>
