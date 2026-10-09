@@ -100,7 +100,8 @@ export const profile: Profile = {
   },
   certifications: [
     '정보처리기사 · 2026.06 · 한국산업인력공단',
-    'AWS Certified Cloud Practitioner · TODO: 취득일',
+    'SQLD · 2025.09 · 한국데이터산업진흥원',
+    'AWS Certified Cloud Practitioner (CLF-C02) · 2026.01.30 · Amazon Web Services',
   ],
   awards: ['제1회 한성 AX 프런티어 챌린지 우수상 · 2026.06 · 한성대학교'],
   educationPrograms: ['투비소프트 넥사크로 전문가 양성과정 10기 · 2024.12 ~ 2025.03'],

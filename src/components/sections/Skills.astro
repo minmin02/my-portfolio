@@ -1,6 +1,21 @@
 ---
 import { profile } from '../../data/profile';
 
+const skillIcons: Record<string, string> = {
+  'Java': 'devicon-java-plain colored',
+  'Spring Boot': 'devicon-spring-plain colored',
+  'GraphQL': 'devicon-graphql-plain colored',
+  'Linux': 'devicon-linux-plain colored',
+  'Kubernetes(k3s, k8s)': 'devicon-kubernetes-plain colored',
+  'Docker': 'devicon-docker-plain colored',
+  'Bash': 'devicon-bash-plain colored',
+  'MySQL': 'devicon-mysql-plain colored',
+  'PostgreSQL': 'devicon-postgresql-plain colored',
+  'MariaDB': 'devicon-mariadb-plain colored',
+  'AWS EC2': 'devicon-amazonwebservices-plain-wordmark colored',
+  'Git': 'devicon-git-plain colored',
+};
+
 const allSkills = Object.entries(profile.skills).flatMap(([cat, items]) =>
   items.map((s) => ({ category: cat, skill: s }))
 );
@@ -24,9 +39,17 @@ const ticker = [...allSkills, ...allSkills];
       <div class="skill-row">
         <span class="skill-cat">{category}</span>
         <div class="skill-tags">
-          {items.map((skill) => (
-            <span class="skill-tag">{skill}</span>
-          ))}
+          {items.map((skill) => {
+            const iconClass = skillIcons[skill];
+            return (
+              <span class="skill-tag">
+                {iconClass && (
+                  <i class={`${iconClass} skill-icon`} aria-hidden="true" />
+                )}
+                {skill}
+              </span>
+            );
+          })}
         </div>
       </div>
     ))}
@@ -35,13 +58,16 @@ const ticker = [...allSkills, ...allSkills];
   <!-- 애니메이션 티커 -->
   <div class="ticker-wrap" aria-hidden="true">
     <div class="ticker-track">
-      {ticker.map((item) => (
-        <span class="ticker-item">
-          <span class="ticker-cat">{item.category}</span>
-          <span class="ticker-skill">{item.skill}</span>
-          <span class="ticker-dot">·</span>
-        </span>
-      ))}
+      {ticker.map((item) => {
+        const iconClass = skillIcons[item.skill];
+        return (
+          <span class="ticker-item">
+            {iconClass && <i class={`${iconClass} ticker-icon`} />}
+            <span class="ticker-skill">{item.skill}</span>
+            <span class="ticker-dot">·</span>
+          </span>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -82,7 +108,7 @@ const ticker = [...allSkills, ...allSkills];
     color: var(--color-text-muted);
     min-width: 6rem;
     flex-shrink: 0;
-    padding-top: 0.2rem;
+    padding-top: 0.35rem;
   }
 
   .skill-tags {
@@ -92,10 +118,12 @@ const ticker = [...allSkills, ...allSkills];
   }
 
   .skill-tag {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
-    padding: var(--space-1) var(--space-3);
+    padding: var(--space-2) var(--space-3);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     color: var(--color-text-muted);
@@ -107,6 +135,12 @@ const ticker = [...allSkills, ...allSkills];
     border-color: var(--color-accent);
     color: var(--color-accent);
     background-color: var(--color-surface);
+  }
+
+  .skill-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+    flex-shrink: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -133,9 +167,7 @@ const ticker = [...allSkills, ...allSkills];
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ticker-track {
-      animation: none;
-    }
+    .ticker-track { animation: none; }
   }
 
   .ticker-item {
@@ -146,10 +178,9 @@ const ticker = [...allSkills, ...allSkills];
     font-size: var(--font-size-sm);
   }
 
-  .ticker-cat {
-    color: var(--color-text-muted);
-    font-size: var(--font-size-xs);
-    letter-spacing: 0.06em;
+  .ticker-icon {
+    font-size: 1rem;
+    line-height: 1;
   }
 
   .ticker-skill {
@@ -159,5 +190,6 @@ const ticker = [...allSkills, ...allSkills];
 
   .ticker-dot {
     color: var(--color-accent);
+    margin-left: var(--space-2);
   }
 </style>
