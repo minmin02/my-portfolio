@@ -1,5 +1,34 @@
 ---
+import SectionTitle from '../ui/SectionTitle.astro';
+import Button from '../ui/Button.astro';
+import { profile } from '../../data/profile';
 ---
-<section id="contact">
-  <h2>연락처</h2>
+
+<section id="contact" class="container" style="padding-block: var(--section-padding-y);">
+  <SectionTitle id="contact" number="07">연락</SectionTitle>
+
+  <div class="grid gap-[var(--space-12)] max-w-2xl">
+    <p
+      class="text-[var(--color-text-muted)]"
+      style="font-size: var(--font-size-lg); line-height: 1.8; word-break: keep-all;"
+    >
+      협업·인턴십·채용 문의를 환영합니다.
+    </p>
+
+    <div class="flex flex-wrap gap-[var(--space-3)]">
+      <Button href={`mailto:${profile.contact.email}`} variant="primary" size="md">
+        이메일 보내기
+      </Button>
+      <Button href={profile.contact.github} target="_blank" variant="secondary" size="md">
+        GitHub ↗
+      </Button>
+      <Button href={profile.contact.velog} target="_blank" variant="ghost" size="md">
+        Velog ↗
+      </Button>
+    </div>
+
+    <p class="text-[var(--color-text-muted)]" style="font-size: var(--font-size-sm);">
+      {profile.contact.email}
+    </p>
+  </div>
 </section>
