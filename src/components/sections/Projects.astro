@@ -30,7 +30,10 @@ const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
           data-animate
           data-delay={String(index + 1)}
         >
-          <div class="project-img-wrap">
+          <div
+            class="project-img-wrap"
+            style={imgSrc ? `--blur-src: url('${imgSrc}')` : ''}
+          >
             {imgSrc ? (
               <img
                 src={imgSrc}
@@ -85,16 +88,29 @@ const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
     text-decoration: none;
   }
 
+  /* 블러 배경 + contain 이미지 컨테이너 */
   .project-img-wrap {
+    position: relative;
     aspect-ratio: 16 / 9;
     overflow: hidden;
     background: var(--color-surface-2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
+  /* 블러 배경 레이어 */
+  .project-img-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -12%;
+    background-image: var(--blur-src);
+    background-size: cover;
+    background-position: center;
+    filter: blur(18px) brightness(0.55) saturate(1.2);
+  }
+
+  /* 원본 이미지 (contain, 비율 유지) */
   .project-img {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -117,7 +133,7 @@ const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
 
   .project-img-placeholder {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    height: 100%;
     background: var(--color-surface-2);
   }
 
