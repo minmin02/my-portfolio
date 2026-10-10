@@ -4,21 +4,26 @@ const series = [
     label: '쿠버네티스',
     desc: '인턴이 쌓아가는 것들',
     url: 'https://velog.io/@minmin02/series/%EC%9D%B8%ED%84%B4%EC%9D%B4-%EC%8C%93%EC%95%84%EA%B0%80%EB%8A%94-%EA%B2%83%EB%93%A4',
+    iconClass: 'devicon-kubernetes-plain colored',
   },
   {
     label: '네트워크',
     desc: 'NetWork',
     url: 'https://velog.io/@minmin02/series/NetWork',
+    iconClass: null,
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg>`,
   },
   {
     label: 'Spring',
     desc: '직접 맛보고 적어보는 Spring FrameWork',
     url: 'https://velog.io/@minmin02/series/%EC%A7%81%EC%A0%91-%EB%A7%9B%EB%B3%B4%EA%B3%A0-%EC%A0%81%EC%96%B4%EB%B3%B4%EB%8A%94-Spring-FrameWork',
+    iconClass: 'devicon-spring-plain colored',
   },
   {
     label: 'Linux',
     desc: 'Linux',
     url: 'https://velog.io/@minmin02/series/Linux',
+    iconClass: 'devicon-linux-plain colored',
   },
 ];
 ---
@@ -42,8 +47,19 @@ const series = [
         data-animate
         data-delay={String(i + 1)}
       >
-        <div class="study-label">{s.label}</div>
-        <div class="study-desc">{s.desc}</div>
+        <div class="study-body">
+          <div class="study-text">
+            <div class="study-label">{s.label}</div>
+            <div class="study-desc">{s.desc}</div>
+          </div>
+          <div class="study-icon-wrap" aria-hidden="true">
+            {s.iconClass ? (
+              <i class={`${s.iconClass} study-icon`} />
+            ) : s.iconSvg ? (
+              <span class="study-svg-icon" set:html={s.iconSvg} />
+            ) : null}
+          </div>
+        </div>
         <div class="study-arrow" aria-hidden="true">↗</div>
       </a>
     ))}
@@ -66,7 +82,7 @@ const series = [
   .study-card {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-3);
     padding: var(--space-6);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -81,6 +97,20 @@ const series = [
     color: var(--color-text);
   }
 
+  .study-body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .study-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
   .study-label {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-bold);
@@ -90,13 +120,53 @@ const series = [
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
     line-height: 1.5;
+    word-break: keep-all;
+  }
+
+  .study-icon-wrap {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.1rem;
+  }
+
+  .study-icon {
+    font-size: 2rem;
+    line-height: 1;
+    opacity: 0.85;
+    transition: opacity 0.15s ease;
+  }
+
+  .study-svg-icon {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-text-muted);
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+  }
+
+  .study-svg-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .study-card:hover .study-icon,
+  .study-card:hover .study-svg-icon {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .study-icon,
+    .study-svg-icon { transition: none; }
   }
 
   .study-arrow {
     position: absolute;
     top: var(--space-4);
     right: var(--space-4);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     color: var(--color-text-muted);
     transition: color 0.15s ease, transform 0.15s ease;
   }
@@ -107,8 +177,6 @@ const series = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .study-arrow {
-      transition: none;
-    }
+    .study-arrow { transition: none; }
   }
 </style>

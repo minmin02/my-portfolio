@@ -83,7 +83,19 @@ export const profile: Profile = {
       role: '서버 파트',
       period: '2025.09 ~ 2026.02',
       type: '동아리',
-      bullets: [],
+      bullets: [
+        'Spring Boot 백엔드 개발, 멀티모듈 구조 응용',
+      ],
+    },
+    {
+      company: '투비소프트 넥사크로 전문가 양성과정 10기',
+      team: '',
+      role: '',
+      period: '2024.12 ~ 2025.03',
+      type: '교육',
+      bullets: [
+        'MyBatis와 전자정부프레임워크를 활용한 웹 애플리케이션 개발',
+      ],
     },
   ],
   skills: {
