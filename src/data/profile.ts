@@ -33,6 +33,7 @@ export interface Profile {
   name: string;
   nameEn: string;
   tagline: string;
+  heroLines: string[];
   description: string;
   aboutLines: string[];
   contact: Contact;
@@ -49,15 +50,18 @@ export const profile: Profile = {
   name: '김민규',
   nameEn: 'Minkyu Kim',
   tagline: 'Backend · Infra',
+  heroLines: [
+    '안녕하세요. 저는 이노그리드에서 인턴으로 일하며 인프라 엔지니어를 준비하는 김민규입니다.',
+    '지금은 쿠버네티스 환경을 직접 구축해 보고, 그 위에서 백엔드를 개발하고 있습니다.',
+  ],
   aboutLines: [
     '안녕하세요! 백엔드와 인프라를 함께 공부하고 있는 김민규입니다.',
-    'Java와 Spring Boot로 API를 만들어 왔고, 지금은 이노그리드 인턴으로 일하며 쿠버네티스와 리눅스 환경을 직접 구축해 보고 있습니다.',
+    'Spring Boot로 API를 만들어 왔고, 지금은 이노그리드 인턴으로 일하며 쿠버네티스와 리눅스 환경을 직접 구축해 보고 있습니다.',
     '저는 코드를 작성하는 것뿐만 아니라 그 서비스가 올라가는 서버와 운영에도 관심이 많아, 만드는 것만큼 안정적으로 지키는 일을 잘하는 엔지니어가 되고자 합니다.',
     '새로운 기술을 배우는 것 또한 늘 환영합니다! 모르는 것은 질문하고, 직접 실험해 확인한 뒤 기록으로 남깁니다.',
     '맡은 역할에서 믿고 맡길 수 있는 사람이 되어, 팀에 보탬이 되고자 합니다.',
   ],
-  description:
-    '안녕하세요. 저는 학교에서 Spring으로 백엔드를 개발해 온 한성대학교 컴퓨터공학부 4학년 김민규입니다. 지금은 이노그리드에서 인턴으로 일하며, 서비스가 올라가는 쿠버네티스 환경을 직접 구축해 보면서 인프라를 배우고 개발에 참여하고 있습니다.',
+  description: '',
   contact: {
     email: 'aktr378@gmail.com',
     github: 'https://github.com/minmin02',
