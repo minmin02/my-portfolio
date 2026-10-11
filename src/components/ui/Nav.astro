@@ -81,6 +81,10 @@
     text-decoration: none;
   }
 
+  .nav-links a.is-active {
+    color: var(--color-accent);
+  }
+
   .theme-btn {
     display: flex;
     align-items: center;
@@ -120,6 +124,28 @@
 </style>
 
 <script is:inline>
+  /* 스크롤 위치 추적 — 현재 섹션을 nav에서 강조 */
+  (function () {
+    var links = document.querySelectorAll('.nav-links a[href^="#"]');
+    var sections = Array.from(links).map(function (link) {
+      return document.querySelector(link.getAttribute('href'));
+    }).filter(Boolean);
+
+    function setActive(id) {
+      links.forEach(function (link) {
+        link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+      });
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+    sections.forEach(function (s) { io.observe(s); });
+  })();
+
   (function () {
     var btn = document.getElementById('theme-toggle');
     var icon = document.getElementById('theme-icon');

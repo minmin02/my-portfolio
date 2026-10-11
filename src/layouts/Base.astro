@@ -70,8 +70,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
   </head>
   <body>
+    <div id="spotlight" aria-hidden="true"></div>
     <Nav />
     <slot />
+    <!-- 스포트라이트: 마우스 위치 추적 -->
+    <script is:inline>
+      (function () {
+        document.addEventListener('mousemove', function (e) {
+          document.documentElement.style.setProperty('--spotlight-x', e.clientX + 'px');
+          document.documentElement.style.setProperty('--spotlight-y', e.clientY + 'px');
+        });
+      })();
+    </script>
+
     <!-- Intersection Observer: 스크롤 진입 애니메이션 -->
     <script is:inline>
       (function () {
