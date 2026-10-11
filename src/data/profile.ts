@@ -115,7 +115,7 @@ export const profile: Profile = {
     school: '한성대학교',
     major: '컴퓨터공학부 (컴퓨터소프트웨어전공)',
     graduation: '2027.02 졸업 예정',
-    gpa: '3.96 / 4.5 (TODO: 만점 기준 확인)',
+    gpa: '3.94 / 4.5',
   },
   certifications: [
     '정보처리기사 · 2026.06 · 한국산업인력공단',
