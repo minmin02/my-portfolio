@@ -1,5 +1,6 @@
 ---
 import { profile } from '../../data/profile';
+import SectionTitle from '../ui/SectionTitle.astro';
 
 const skillIcons: Record<string, string> = {
   'Java': 'devicon-java-plain colored',
@@ -24,13 +25,7 @@ const ticker = [...allSkills, ...allSkills];
 
 <section id="skills" class="skills-section">
   <div class="container">
-    <h2
-      class="section-title"
-      data-animate
-      style="font-size: var(--font-size-sm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--space-12);"
-    >
-      Skills
-    </h2>
+    <SectionTitle num="06">Skills</SectionTitle>
   </div>
 
   <!-- 카테고리별 행 -->
