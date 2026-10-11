@@ -1,0 +1,128 @@
+---
+import { getCollection } from 'astro:content';
+import { profile } from '../../data/profile';
+
+const allProjects = await getCollection('projects');
+const certCount = profile.certifications.filter((c) => !c.includes('TODO')).length;
+const gpaVal = parseFloat(profile.education.gpa.split(' ')[0]);
+
+const stats = [
+  { value: gpaVal, decimals: 2, label: '학점', sub: '/ 4.5' },
+  { value: certCount, decimals: 0, label: '자격증', sub: '취득' },
+  { value: allProjects.length, decimals: 0, label: '프로젝트', sub: '완성' },
+  { value: 1, decimals: 0, label: '인턴십', sub: '이노그리드 재직 중' },
+];
+---
+
+<section class="stats-section container">
+  <div class="stats-grid">
+    {stats.map((stat, i) => (
+      <div class="stat-item" data-animate data-delay={String(i + 1)}>
+        <div class="stat-value-row">
+          <span
+            class="stat-number"
+            data-target={String(stat.value)}
+            data-decimals={String(stat.decimals)}
+          >
+            {stat.decimals > 0 ? stat.value.toFixed(stat.decimals) : stat.value}
+          </span>
+        </div>
+        <p class="stat-label">{stat.label}</p>
+        <p class="stat-sub">{stat.sub}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .stats-section {
+    padding-block: var(--space-16);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-10) var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-1);
+  }
+
+  .stat-number {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    margin-top: var(--space-3);
+  }
+
+  .stat-sub {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-top: var(--space-1);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var nums = document.querySelectorAll('.stat-number');
+    if (!nums.length) return;
+
+    function countUp(el) {
+      var target = parseFloat(el.dataset.target);
+      var decimals = parseInt(el.dataset.decimals, 10);
+      var duration = 1400;
+      var startTime = null;
+
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = (target * ease).toFixed(decimals);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target.toFixed(decimals);
+      }
+      requestAnimationFrame(step);
+    }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var fired = false;
+    var section = document.querySelector('.stats-section');
+    if (!section) return;
+
+    new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !fired) {
+          fired = true;
+          nums.forEach(countUp);
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 }).observe(section);
+  })();
+</script>

@@ -14,9 +14,9 @@ import { profile } from '../../data/profile';
       <div class="hero-animate-1">
         <p
           class="mb-[var(--space-3)] text-[var(--color-text-muted)]"
-          style="letter-spacing: 0.08em; font-size: var(--font-size-sm);"
+          style="letter-spacing: 0.08em; font-size: var(--font-size-sm); display: flex; align-items: center; min-height: 1.5em;"
         >
-          {profile.tagline}
+          <span id="hero-tagline" data-text={profile.tagline}></span><span class="type-cursor" aria-hidden="true"></span>
         </p>
         <h1
           class="gradient-text font-[var(--font-weight-bold)] leading-none"
@@ -164,4 +164,40 @@ import { profile } from '../../data/profile';
       animation: none;
     }
   }
+
+  .type-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 0.85em;
+    background-color: var(--color-accent);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .type-cursor { animation: none; }
+  }
 </style>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('hero-tagline');
+    if (!el) return;
+    var text = el.dataset.text || '';
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = text;
+      return;
+    }
+    var i = 0;
+    setTimeout(function type() {
+      el.textContent = text.slice(0, i++);
+      if (i <= text.length) setTimeout(type, 90);
+    }, 500);
+  })();
+</script>
