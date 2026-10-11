@@ -7,7 +7,7 @@ stack: ["Spring Boot", "JPA", "QueryDSL", "MariaDB", "Redis", "Docker"]
 summary: "관광 데이터를 활용해 감정에 맞는 여행지를 추천하고, 비슷한 감정의 여행자끼리 동행을 매칭하는 웹 서비스"
 github: "https://github.com/infiniment/MoodTrip"
 image: "moodTrip"
-notion: "https://app.notion.com/p/M-o-o-d-T-r-i-p-X-2c15d87e065581d6a960eb16dd2fe425?source=copy_link"
+notion: "https://whip-juice-d4c.notion.site/M-o-o-d-T-r-i-p-X-2c15d87e065581d6a960eb16dd2fe425?pvs=73"
 order: 1
 ---
 

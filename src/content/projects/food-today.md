@@ -6,7 +6,7 @@ role: "Web | 화면 설계 · 검색 API · Nexacro · MyBatis"
 stack: ["Nexacro", "전자정부프레임워크", "MyBatis", "Tomcat"]
 summary: "맛집 검색 플랫폼. 넥사크로로 화면을 설계하고, 전자정부프레임워크(Spring)와 MyBatis로 SQL을 작성해 검색 API를 구현한 뒤 화면과 연동"
 image: "eatToday"
-notion: "https://app.notion.com/p/10-2c15d87e06558037be39cf7aab5e32eb?source=copy_link"
+notion: "https://whip-juice-d4c.notion.site/10-2c15d87e06558037be39cf7aab5e32eb"
 order: 2
 ---
 

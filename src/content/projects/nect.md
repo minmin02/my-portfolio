@@ -7,7 +7,7 @@ stack: ["Spring Boot", "PostgreSQL", "Redis", "Docker Compose", "Nginx"]
 summary: "스터디·사이드프로젝트 팀원을 찾는 매칭 서비스"
 github: "https://github.com/UMC-NECT/Nect-Backend"
 image: "NECT"
-notion: "https://app.notion.com/p/NECT-3f55d87e065580f3a114f80409524650?source=copy_link"
+notion: "https://whip-juice-d4c.notion.site/NECT-3f55d87e065580f3a114f80409524650"
 order: 4
 ---
 
