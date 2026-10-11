@@ -32,9 +32,11 @@ const resumeUrl = '#';
     </a>
 
     <div class="contact-links" data-animate data-delay="3">
-      <a href={resumeUrl} class="contact-pill" target={resumeUrl !== '#' ? '_blank' : undefined} rel={resumeUrl !== '#' ? 'noopener noreferrer' : undefined}>
-        RESUME ↗
-      </a>
+      {resumeUrl !== '#' && (
+        <a href={resumeUrl} class="contact-pill" target="_blank" rel="noopener noreferrer">
+          RESUME ↗
+        </a>
+      )}
       <a href={profile.contact.velog} class="contact-pill" target="_blank" rel="noopener noreferrer">
         BLOG ↗
       </a>

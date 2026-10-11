@@ -11,75 +11,202 @@ import { profile } from '../../data/profile';
     About Me
   </h2>
 
-  <div class="about-grid">
-    <!-- 왼쪽: 큰 이름 + 소개 텍스트 -->
-    <div class="about-left">
-      <h3
-        class="about-name gradient-text"
-        data-animate="fade-left"
-        data-delay="1"
-      >
-        {profile.nameEn}
-      </h3>
-
-      <div class="about-lines" data-animate="fade-left" data-delay="2">
-        {profile.aboutLines.map((line) => (
-          <p class="about-line">{line}</p>
-        ))}
-      </div>
+  <!-- 프로필 정보 + 연락처 블록 -->
+  <div class="profile-block" data-animate data-delay="1">
+    <!-- 왼쪽: 연락처 -->
+    <div class="pblock-contact">
+      <p class="pblock-label">contact</p>
+      <ul class="contact-items">
+        <li class="contact-item">
+          <span class="contact-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <polyline points="2,7 12,14 22,7"/>
+            </svg>
+          </span>
+          <a href={`mailto:${profile.contact.email}`} class="contact-link">{profile.contact.email}</a>
+        </li>
+        <li class="contact-item">
+          <span class="contact-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C9.4 21 3 14.6 3 6.5a1 1 0 011-1H8a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/>
+            </svg>
+          </span>
+          <a href={`tel:${profile.contact.phone.replace(/-/g, '')}`} class="contact-link">{profile.contact.phone}</a>
+        </li>
+        <li class="contact-item">
+          <span class="contact-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+          </span>
+          <a href={profile.contact.github} target="_blank" rel="noopener noreferrer" class="contact-link">GitHub ↗</a>
+        </li>
+        <li class="contact-item">
+          <span class="contact-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </span>
+          <a href={profile.contact.velog} target="_blank" rel="noopener noreferrer" class="contact-link">Velog ↗</a>
+        </li>
+      </ul>
     </div>
 
-    <!-- 오른쪽: 연락처 -->
-    <div class="about-right" data-animate data-delay="3">
-      <p
-        class="text-[var(--color-text-muted)]"
-        style="font-size: var(--font-size-xs); letter-spacing: 0.1em; margin-bottom: var(--space-4);"
-      >
-        CONTACT
-      </p>
-      <div class="flex flex-col" style="gap: var(--space-2);">
-        <a
-          href={profile.contact.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="contact-link underline-slide"
-        >
-          GitHub ↗
-        </a>
-        <a
-          href={profile.contact.velog}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="contact-link underline-slide"
-        >
-          Velog ↗
-        </a>
-        <a
-          href={`mailto:${profile.contact.email}`}
-          class="contact-link underline-slide"
-        >
-          {profile.contact.email}
-        </a>
-      </div>
+    <!-- 오른쪽: 개인 정보 -->
+    <div class="pblock-info">
+      <dl class="info-list">
+        <div class="info-row">
+          <dt class="info-key">나이</dt>
+          <span class="info-sep" aria-hidden="true">|</span>
+          <dd class="info-val">{profile.personalInfo.age}</dd>
+        </div>
+        <div class="info-row">
+          <dt class="info-key">거주지</dt>
+          <span class="info-sep" aria-hidden="true">|</span>
+          <dd class="info-val">{profile.personalInfo.location}</dd>
+        </div>
+        <div class="info-row">
+          <dt class="info-key">학교</dt>
+          <span class="info-sep" aria-hidden="true">|</span>
+          <dd class="info-val">{profile.education.school}</dd>
+        </div>
+        <div class="info-row">
+          <dt class="info-key">전공</dt>
+          <span class="info-sep" aria-hidden="true">|</span>
+          <dd class="info-val">{profile.personalInfo.major}</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <!-- 이름 + 소개 텍스트 -->
+  <div class="about-body">
+    <h3
+      class="about-name gradient-text"
+      data-animate="fade-left"
+      data-delay="2"
+    >
+      {profile.nameEn}
+    </h3>
+
+    <div class="about-lines" data-animate="fade-left" data-delay="3">
+      {profile.aboutLines.map((line) => (
+        <p class="about-line">{line}</p>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  .about-grid {
+  /* ── 프로필 정보 블록 ── */
+  .profile-block {
     display: grid;
-    gap: var(--space-12);
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-12);
   }
 
-  @media (min-width: 768px) {
-    .about-grid {
-      grid-template-columns: 3fr 1fr;
-      gap: var(--space-16);
-      align-items: start;
+  @media (min-width: 640px) {
+    .profile-block {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
     }
   }
 
-  .about-left {
+  .pblock-label {
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  /* ── 연락처 목록 ── */
+  .contact-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .contact-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .contact-link {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    word-break: break-all;
+  }
+
+  .contact-link:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-link { transition: none; }
+  }
+
+  /* ── 개인 정보 목록 ── */
+  .info-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .info-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+
+  .info-key {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    white-space: nowrap;
+    min-width: 3.5rem;
+    flex-shrink: 0;
+  }
+
+  .info-sep {
+    color: var(--color-border);
+    font-size: var(--font-size-sm);
+    user-select: none;
+    flex-shrink: 0;
+  }
+
+  .info-val {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  /* ── 이름 + 소개 ── */
+  .about-body {
     display: flex;
     flex-direction: column;
     gap: var(--space-8);
@@ -103,28 +230,5 @@ import { profile } from '../../data/profile';
     line-height: 1.8;
     color: var(--color-text-muted);
     word-break: keep-all;
-  }
-
-  .about-right {
-    padding-top: var(--space-2);
-  }
-
-  .contact-link {
-    display: inline-block;
-    font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-
-  .contact-link:hover {
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .contact-link {
-      transition: none;
-    }
   }
 </style>

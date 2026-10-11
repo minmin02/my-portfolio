@@ -1,7 +1,14 @@
 export interface Contact {
   email: string;
+  phone: string;
   github: string;
   velog: string;
+}
+
+export interface PersonalInfo {
+  age: string;
+  location: string;
+  major: string;
 }
 
 export interface ExperienceItem {
@@ -38,6 +45,7 @@ export interface Profile {
   description: string;
   aboutLines: string[];
   contact: Contact;
+  personalInfo: PersonalInfo;
   experience: ExperienceItem[];
   skills: SkillGroup;
   education: Education;
@@ -64,8 +72,14 @@ export const profile: Profile = {
   description: '',
   contact: {
     email: 'aktr378@gmail.com',
+    phone: '010-3214-9655',
     github: 'https://github.com/minmin02',
     velog: 'https://velog.io/@minmin02/posts',
+  },
+  personalInfo: {
+    age: '2002년생 (만 24세)',
+    location: '성남시 분당구',
+    major: '컴퓨터공학부',
   },
   experience: [
     {
