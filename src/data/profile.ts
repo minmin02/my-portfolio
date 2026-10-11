@@ -11,6 +11,7 @@ export interface ExperienceItem {
   period: string;
   type: string;
   bullets: string[];
+  logo?: string;
 }
 
 export interface SkillGroup {
@@ -73,6 +74,7 @@ export const profile: Profile = {
       role: '인턴',
       period: '2026.07 ~ 재직 중',
       type: 'IPP 일학습병행',
+      logo: 'innogridlogo.png',
       bullets: [
         'k3s 멀티 노드, 멀티 마스터 k8s 클러스터를 가상머신에 구축하고 매주 팀에 발표',
         'MySQL 데이터를 NFS CSI 동적 프로비저닝으로 옮겨 워커 노드 한 대에 묶여 있던 구조를 풀고, 이후 NFS 서버가 단일 장애점이 되는 한계를 확인',
@@ -86,6 +88,7 @@ export const profile: Profile = {
       role: '서버 파트',
       period: '2025.09 ~ 2026.02',
       type: '동아리',
+      logo: 'umclogo.png',
       bullets: [
         'Spring Boot 백엔드 개발, 멀티모듈 구조 응용',
       ],
@@ -96,6 +99,7 @@ export const profile: Profile = {
       role: '',
       period: '2024.12 ~ 2025.03',
       type: '교육',
+      logo: 'tobesoftlogo.png',
       bullets: [
         'MyBatis와 전자정부프레임워크를 활용한 웹 애플리케이션 개발',
       ],
