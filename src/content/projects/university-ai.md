@@ -7,7 +7,7 @@ role: "AI | 에이전트 개발 · 백엔드 · RAG · Spring"
 stack: ["Spring", "Python", "RAG", "pgvector"]
 summary: "대학 홈페이지·공지·학술정보관 등 흩어진 정보를 질문 하나로 연결하는 메타 에이전트 기반 AI 서비스"
 image: "hansung"
-notion: "https://whip-juice-d4c.notion.site/2026-1-AX-Meta-Agent-Integrated-AI-Service-b635d87e065582519fe0014e5bfeb4e3?pvs=73"
+notion: "https://blushing-distance-7ef.notion.site/2026-1-AX-Meta-Agent-Integrated-AI-Service-2a02a85401ca8234971a813bd0b2fb0d"
 order: 5
 ---
 

@@ -6,7 +6,7 @@ role: "Backend | 팀장 · 자막 분석 로직 · 관점 점수 산식 설계 �
 stack: ["Spring Boot", "Qdrant", "Python"]
 summary: "YouTube 영상의 자막을 분석해 다양한 관점을 탐색하는 서비스"
 image: "newnew"
-notion: "https://whip-juice-d4c.notion.site/NEWNEW-3f55d87e065580748aaafdea9509ba37?pvs=73"
+notion: "https://whip-juice-d4c.notion.site/NEWNEW-3f55d87e065580748aaafdea9509ba37"
 order: 3
 ---
 
